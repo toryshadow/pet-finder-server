@@ -21,7 +21,6 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { AllConfigType } from './config/config.type';
 import { SessionModule } from './session/session.module';
 import { MailerModule } from './mailer/mailer.module';
-import { PetController } from './pet/pet.controller';
 import { PetModule } from './pet/pet.module';
 
 const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
@@ -79,6 +78,5 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
     HomeModule,
     PetModule,
   ],
-  controllers: [PetController],
 })
 export class AppModule {}

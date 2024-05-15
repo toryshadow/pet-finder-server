@@ -72,7 +72,7 @@ export class UsersRelationalRepository implements UserRepository {
     });
 
     if (!entity) {
-      throw new Error('User not found');
+      throw new Error('Pet not found');
     }
 
     const updatedEntity = await this.usersRepository.save(

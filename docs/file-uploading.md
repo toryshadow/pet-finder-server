@@ -39,7 +39,7 @@ sequenceDiagram
 
     A->>B: Upload file via POST /api/v1/files/upload
     B->>A: Receive File entity with "id" and "path" properties
-    note left of A: Attach File entity to User entity
+    note left of A: Attach File entity to Pet entity
     A->>B: Update user via PATCH /api/v1/auth/me
 ```
 
@@ -95,7 +95,7 @@ sequenceDiagram
     A->>B: Upload file via POST /api/v1/files/upload
     B->>C: Upload file to S3
     B->>A: Receive File entity with "id" and "path" properties
-    note left of A: Attach File entity to User entity
+    note left of A: Attach File entity to Pet entity
     A->>B: Update user via PATCH /api/v1/auth/me
 ```
 
@@ -168,7 +168,7 @@ sequenceDiagram
     note right of B: Generate presigned URL
     B->>A: Receive presigned URL and File entity with "id" and "path" properties
     A->>C: Upload file to S3 via presigned URL
-    note right of A: Attach File entity to User entity
+    note right of A: Attach File entity to Pet entity
     A->>B: Update user via PATCH /api/v1/auth/me
 ```
 

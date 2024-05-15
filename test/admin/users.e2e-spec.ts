@@ -41,7 +41,7 @@ describe('Users Module', () => {
         });
     });
 
-    describe('User with "Admin" role', () => {
+    describe('Pet with "Admin" role', () => {
       it('should change password for existing user: /api/v1/users/:id (PATCH)', () => {
         return request(app)
           .patch(`/api/v1/users/${newUser.id}`)
@@ -76,7 +76,7 @@ describe('Users Module', () => {
     const newUserByAdminEmail = `user-created-by-admin.${Date.now()}@example.com`;
     const newUserByAdminPassword = `secret`;
 
-    describe('User with "Admin" role', () => {
+    describe('Pet with "Admin" role', () => {
       it('should fail to create new user with invalid email: /api/v1/users (POST)', () => {
         return request(app)
           .post(`/api/v1/users`)
@@ -126,7 +126,7 @@ describe('Users Module', () => {
   });
 
   describe('Get many', () => {
-    describe('User with "Admin" role', () => {
+    describe('Pet with "Admin" role', () => {
       it('should get list of users: /api/v1/users (GET)', () => {
         return request(app)
           .get(`/api/v1/users`)

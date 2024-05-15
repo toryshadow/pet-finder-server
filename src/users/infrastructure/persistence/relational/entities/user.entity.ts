@@ -9,7 +9,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { RoleEntity } from '../../../../../roles/infrastructure/persistence/relational/entities/role.entity';
 import { StatusEntity } from '../../../../../statuses/infrastructure/persistence/relational/entities/status.entity';
 import { FileEntity } from '../../../../../files/infrastructure/persistence/relational/entities/file.entity';
 
@@ -21,6 +20,8 @@ import { EntityRelationalHelper } from '../../../../../utils/relational-entity-h
 // We duplicate these rules because you can choose not to use adapters
 // in your project and return an ORM entity directly in response.
 import { Exclude, Expose } from 'class-transformer';
+import { PetEntity } from '../../../../../pet/infrastructure/persistence/relational/entities/pet.entity';
+import { RoleEntity } from '../../../../../roles/infrastructure/persistence/relational/entities/role.entity';
 
 @Entity({
   name: 'user',
@@ -78,6 +79,9 @@ export class UserEntity extends EntityRelationalHelper implements User {
     eager: true,
   })
   status?: StatusEntity;
+
+  @ManyToOne(() => PetEntity, (pet) => pet.owner, { onDelete: 'CASCADE' })
+  pets: PetEntity;
 
   @CreateDateColumn()
   createdAt: Date;
