@@ -5,6 +5,7 @@ import { FilterPetDto, SortPetDto } from '../../dto/query-pet.dto';
 import { PetEntity } from './relational/entities/pet.entity';
 import { Pet } from '../../domain/pet';
 import { DeepPartial } from 'typeorm';
+import { UserEntity } from '../../../users/infrastructure/persistence/relational/entities/user.entity';
 
 export abstract class PetRepository {
   abstract findOne(options: EntityCondition<Pet>): Promise<NullableType<Pet>>;
@@ -22,10 +23,12 @@ export abstract class PetRepository {
     filterOptions,
     sortOptions,
     paginationOptions,
+    owner,
   }: {
     filterOptions?: FilterPetDto | null;
     sortOptions?: SortPetDto[] | null;
     paginationOptions: IPaginationOptions;
+    owner?: UserEntity;
   }): Promise<Pet[]>;
 
   abstract softDelete(id: PetEntity['id']): Promise<void>;

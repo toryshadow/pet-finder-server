@@ -14,6 +14,7 @@ import { FileEntity } from '../../../../../files/infrastructure/persistence/rela
 import { PetTypeEntity } from '../../../../../pet-type/infrastructure/persistence/relational/entities/pet-type.entity';
 import { UserEntity } from '../../../../../users/infrastructure/persistence/relational/entities/user.entity';
 import { EntityRelationalHelper } from '../../../../../utils/relational-entity-helper';
+import { User } from '../../../../../users/domain/user';
 
 @Entity({
   name: 'pet',

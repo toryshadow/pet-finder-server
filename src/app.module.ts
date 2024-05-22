@@ -22,6 +22,7 @@ import { AllConfigType } from './config/config.type';
 import { SessionModule } from './session/session.module';
 import { MailerModule } from './mailer/mailer.module';
 import { PetModule } from './pet/pet.module';
+import { PushNotificationsModule } from './push-notifications/push-notifications.module';
 
 const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
   useClass: TypeOrmConfigService,
@@ -75,6 +76,7 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
     SessionModule,
     MailModule,
     MailerModule,
+    PushNotificationsModule,
     HomeModule,
     PetModule,
   ],

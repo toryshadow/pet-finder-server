@@ -13,6 +13,7 @@ import { CreatePetDto } from './dto/create-pet.dto';
 import { FilterPetDto, SortPetDto } from './dto/query-pet.dto';
 import { PetRepository } from './infrastructure/persistence/pet.repository';
 import { Pet } from './domain/pet';
+import { UserEntity } from '../users/infrastructure/persistence/relational/entities/user.entity';
 
 @Injectable()
 export class PetService {
@@ -50,15 +51,18 @@ export class PetService {
     filterOptions,
     sortOptions,
     paginationOptions,
+    owner,
   }: {
     filterOptions?: FilterPetDto | null;
     sortOptions?: SortPetDto[] | null;
     paginationOptions: IPaginationOptions;
+    owner?: UserEntity;
   }): Promise<Pet[]> {
     return this.petRepository.findManyWithPagination({
       filterOptions,
       sortOptions,
       paginationOptions,
+      owner,
     });
   }
 

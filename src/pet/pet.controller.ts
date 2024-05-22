@@ -72,6 +72,32 @@ export class PetController {
     );
   }
 
+  @Get('/my')
+  @HttpCode(HttpStatus.OK)
+  async findAllUserPets(
+    @Request() request,
+    @Query() query: QueryPetrDto,
+  ): Promise<InfinityPaginationResultType<Pet>> {
+    const page = query?.page ?? 1;
+    let limit = query?.limit ?? 10;
+    if (limit > 50) {
+      limit = 50;
+    }
+
+    return infinityPagination(
+      await this.petService.findManyWithPagination({
+        filterOptions: query?.filters,
+        sortOptions: query?.sort,
+        paginationOptions: {
+          page,
+          limit,
+        },
+        owner: request.user,
+      }),
+      { page, limit },
+    );
+  }
+
   @SerializeOptions({
     groups: ['admin'],
   })

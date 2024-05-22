@@ -11,6 +11,7 @@ import { PetMapper } from '../mappers/pet.mapper';
 import { EntityCondition } from '../../../../../utils/types/entity-condition.type';
 import { FilterPetDto, SortPetDto } from '../../../../dto/query-pet.dto';
 import { IPaginationOptions } from '../../../../../utils/types/pagination-options';
+import { UserEntity } from '../../../../../users/infrastructure/persistence/relational/entities/user.entity';
 
 @Injectable()
 export class PetRelationalRepository implements PetRepository {
@@ -64,13 +65,19 @@ export class PetRelationalRepository implements PetRepository {
     filterOptions,
     sortOptions,
     paginationOptions,
+    owner,
   }: {
     filterOptions?: FilterPetDto | null;
     sortOptions?: SortPetDto[] | null;
     paginationOptions: IPaginationOptions;
+    owner?: UserEntity;
   }): Promise<Pet[]> {
-    const where: FindOptionsWhere<PetEntity> = {};
-
+    let where: FindOptionsWhere<PetEntity> = {};
+    if (owner) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      where = { ...where, owner: owner.id };
+    }
     console.log(filterOptions);
     const entities = await this.petEntityRepository.find({
       skip: (paginationOptions.page - 1) * paginationOptions.limit,
