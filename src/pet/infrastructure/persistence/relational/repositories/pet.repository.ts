@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOptionsWhere, Repository } from 'typeorm';
+import { FindOptionsWhere, In, Repository } from 'typeorm';
 import { PetEntity } from '../entities/pet.entity';
 import { NullableType } from '../../../../../utils/types/nullable.type';
 
@@ -74,9 +74,7 @@ export class PetRelationalRepository implements PetRepository {
   }): Promise<Pet[]> {
     let where: FindOptionsWhere<PetEntity> = {};
     if (owner) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      where = { ...where, owner: owner.id };
+      where = { ...where, owner: In([owner.id]) };
     }
     console.log(filterOptions);
     const entities = await this.petEntityRepository.find({

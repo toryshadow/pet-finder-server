@@ -58,11 +58,12 @@ export class PetService {
     paginationOptions: IPaginationOptions;
     owner?: UserEntity;
   }): Promise<Pet[]> {
+    console.log(owner);
     return this.petRepository.findManyWithPagination({
       filterOptions,
       sortOptions,
       paginationOptions,
-      owner,
+      owner: owner,
     });
   }
 

@@ -8,6 +8,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { StatusEntity } from '../../../../../statuses/infrastructure/persistence/relational/entities/status.entity';
 import { FileEntity } from '../../../../../files/infrastructure/persistence/relational/entities/file.entity';
@@ -80,7 +81,7 @@ export class UserEntity extends EntityRelationalHelper implements User {
   })
   status?: StatusEntity;
 
-  @ManyToOne(() => PetEntity, (pet) => pet.owner, { onDelete: 'CASCADE' })
+  @OneToMany(() => PetEntity, (pet) => pet.owner)
   pets: PetEntity;
 
   @CreateDateColumn()

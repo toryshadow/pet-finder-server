@@ -16,6 +16,8 @@ export class UserMapper {
     user.socialId = raw.socialId;
     user.firstName = raw.firstName;
     user.lastName = raw.lastName;
+    user.photo = null;
+
     if (raw.photo) {
       user.photo = FileMapper.toDomain(raw.photo);
     }

@@ -225,12 +225,16 @@ export class AuthService {
       },
     );
 
-    await this.mailService.userSignUp({
-      to: dto.email,
-      data: {
-        hash,
-      },
-    });
+    try {
+      await this.mailService.userSignUp({
+        to: dto.email,
+        data: {
+          hash,
+        },
+      });
+    } catch (e) {
+      console.warn(e);
+    }
   }
 
   async confirmEmail(hash: string): Promise<void> {

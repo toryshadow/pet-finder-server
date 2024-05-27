@@ -6,7 +6,6 @@ import {
   DeleteDateColumn,
   Column,
   UpdateDateColumn,
-  OneToMany,
 } from 'typeorm';
 
 import { Pet } from '../../../../domain/pet';
@@ -14,7 +13,6 @@ import { FileEntity } from '../../../../../files/infrastructure/persistence/rela
 import { PetTypeEntity } from '../../../../../pet-type/infrastructure/persistence/relational/entities/pet-type.entity';
 import { UserEntity } from '../../../../../users/infrastructure/persistence/relational/entities/user.entity';
 import { EntityRelationalHelper } from '../../../../../utils/relational-entity-helper';
-import { User } from '../../../../../users/domain/user';
 
 @Entity({
   name: 'pet',
@@ -23,7 +21,7 @@ export class PetEntity extends EntityRelationalHelper implements Pet {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => UserEntity, (user) => user.pets)
+  @ManyToOne(() => UserEntity, (user) => user.pets, { onDelete: 'CASCADE' })
   owner: UserEntity;
 
   @Column()
